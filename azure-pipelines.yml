@@ -11,8 +11,8 @@ stages:
   jobs:
   - job: Build
 
-pool:
-  vmImage: ubuntu-latest
+    pool:
+      vmImage: ubuntu-latest
 
 steps:
 - script: echo Hello, world!
