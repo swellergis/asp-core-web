@@ -1,5 +1,6 @@
 trigger:
-- main
+#- main
+- none
 
 pool:
   vmImage: 'windows-latest'
