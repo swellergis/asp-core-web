@@ -14,7 +14,7 @@ steps:
   displayName: Install Contrast Extension
   inputs:
     action: 'Install Extensions'
-    azureSubscription: '$(AzureSubscriptionName)'
+    azureSubscription: 'ATARC Zero Trust Solution (275fde5b-989e-4985-aad3-51f9e39899f5)'
     resourceGroupName: 'sweller-res-grp'
     webAppName: 'sweller-app2'
     extensionsList: 'Contrast.NetCore.Azure.SiteExtension'
