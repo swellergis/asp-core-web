@@ -14,7 +14,7 @@ steps:
   displayName: Install Contrast Extension
   inputs:
     action: 'Install Extensions'
-    azureSubscription: 'contrast'
+    azureSubscription: '$(AzureSubscriptionName)'
     resourceGroupName: 'sweller-res-grp'
     webAppName: 'sweller-app2'
     extensionsList: 'Contrast.NetCore.Azure.SiteExtension'
