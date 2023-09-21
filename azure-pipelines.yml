@@ -2,39 +2,51 @@ trigger:
 #- main
 - none
 
+jobs:
+- job: verify_application
+  pool: server
+  steps:
+  - task: ContrastIntegration@2
+    inputs:
+      ContrastService: 'Contrast'
+      Application: '9b8ed0ab-66de-42fe-a041-812a47eafe58'
+      CriticalLimit: '0'
+      HighLimit: '0'
+      MediumLimit: '2'
+      LowLimit: '2'
+      NoteLimit: '2'
 
-pool:
-  vmImage: 'windows-latest'
+- job: deploy_application
+  pool:
+    vmImage: 'windows-latest'
+  steps:
+  - task: DotNetCoreCLI@2
+    displayName: Restore
+    inputs:
+      command: 'restore'
+      projects: '**/*.csproj'
+  - task: AzureAppServiceManage@0
+    displayName: Install Contrast Extension
+    inputs:
+      action: 'Install Extensions'
+      azureSubscription: 'ATARC Zero Trust Solution (275fde5b-989e-4985-aad3-51f9e39899f5)'
+      resourceGroupName: 'sweller-res-grp'
+      webAppName: 'sweller-app2'
+      extensionsList: 'Contrast.NetCore.Azure.SiteExtension'
+  - task: DotNetCoreCLI@2
+    displayName: Build
+    inputs:
+      command: 'build'
+  - task: DotNetCoreCLI@2
+    displayName: Publish
+    inputs:
+      command: publish
+      publishWebProjects: True
+      arguments: '--configuration $(BuildConfiguration) --output $(build.artifactstagingdirectory)'
+      zipAfterPublish: True
+  - task: PublishBuildArtifacts@1
+    inputs:
+      PathtoPublish: '$(Build.ArtifactStagingDirectory)'
+      ArtifactName: 'drop'
+      publishLocation: 'Container'
 
-steps:
-- task: DotNetCoreCLI@2
-  displayName: Restore
-  inputs:
-    command: 'restore'
-    projects: '**/*.csproj'
-- task: AzureAppServiceManage@0
-  displayName: Install Contrast Extension
-  inputs:
-    action: 'Install Extensions'
-    azureSubscription: 'ATARC Zero Trust Solution (275fde5b-989e-4985-aad3-51f9e39899f5)'
-    resourceGroupName: 'sweller-res-grp'
-    webAppName: 'sweller-app2'
-    extensionsList: 'Contrast.NetCore.Azure.SiteExtension'
-
-- task: DotNetCoreCLI@2
-  displayName: Build
-  inputs:
-    command: 'build'
-- task: DotNetCoreCLI@2
-  displayName: Publish
-  inputs:
-    command: publish
-    publishWebProjects: True
-    arguments: '--configuration $(BuildConfiguration) --output $(build.artifactstagingdirectory)'
-    zipAfterPublish: True
-
-- task: PublishBuildArtifacts@1
-  inputs:
-    PathtoPublish: '$(Build.ArtifactStagingDirectory)'
-    ArtifactName: 'drop'
-    publishLocation: 'Container'
