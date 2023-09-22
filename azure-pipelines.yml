@@ -8,7 +8,7 @@ jobs:
   steps:
   - task: ContrastIntegration@2
     inputs:
-      ContrastService: 'Contrast'
+      ContrastService: 'contrast'
       Application: '9b8ed0ab-66de-42fe-a041-812a47eafe58'
       CriticalLimit: '0'
       HighLimit: '0'
