@@ -17,8 +17,8 @@ jobs:
     inputs:
       action: 'Install Extensions'
       azureSubscription: 'ATARC Zero Trust Solution (275fde5b-989e-4985-aad3-51f9e39899f5)'
-      resourceGroupName: 'dotnet-7-winapp'
-      webAppName: 'sweller-app2'
+      resourceGroupName: 'dotnet7-web'
+      webAppName: 'dotnet-7-winapp'
       extensionsList: 'Contrast.NetCore.Azure.SiteExtension'
   - task: DotNetCoreCLI@2
     displayName: Build
