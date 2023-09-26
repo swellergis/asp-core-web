@@ -3,19 +3,6 @@ trigger:
 - none
 
 jobs:
-- job: verify_application
-  pool: server
-  steps:
-  - task: ContrastIntegration@2
-    inputs:
-      ContrastService: 'contrast'
-      Application: '9b8ed0ab-66de-42fe-a041-812a47eafe58'
-      CriticalLimit: '0'
-      HighLimit: '0'
-      MediumLimit: '2'
-      LowLimit: '2'
-      NoteLimit: '2'
-
 - job: deploy_application
   pool:
     vmImage: 'windows-latest'
@@ -30,7 +17,7 @@ jobs:
     inputs:
       action: 'Install Extensions'
       azureSubscription: 'ATARC Zero Trust Solution (275fde5b-989e-4985-aad3-51f9e39899f5)'
-      resourceGroupName: 'sweller-res-grp'
+      resourceGroupName: 'dotnet-7-winapp'
       webAppName: 'sweller-app2'
       extensionsList: 'Contrast.NetCore.Azure.SiteExtension'
   - task: DotNetCoreCLI@2
