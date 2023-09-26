@@ -36,11 +36,10 @@ jobs:
       PathtoPublish: '$(Build.ArtifactStagingDirectory)'
       ArtifactName: 'drop'
       publishLocation: 'Container'
-
-- task: AzureRmWebAppDeployment@4
-  inputs:
-    ConnectionType: 'AzureRM'
-    azureSubscription: 'ATARC Zero Trust Solution (275fde5b-989e-4985-aad3-51f9e39899f5)'
-    appType: 'webApp'
-    WebAppName: 'dotnet-7-winapp'
-    packageForLinux: '$(System.DefaultWorkingDirectory)/**/*.zip'
+  - task: AzureRmWebAppDeployment@4
+    inputs:
+      ConnectionType: 'AzureRM'
+      azureSubscription: 'ATARC Zero Trust Solution (275fde5b-989e-4985-aad3-51f9e39899f5)'
+      appType: 'webApp'
+      WebAppName: 'dotnet-7-winapp'
+      packageForLinux: '$(System.DefaultWorkingDirectory)/**/*.zip'
