@@ -20,3 +20,10 @@ html {
 body {
   margin-bottom: 60px;
 }
+
+a {
+  color: #8D34FA;
+}
+.footer a,.text-muted>a {
+  color: #6206EE;
+}
